@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>TFG Guillermo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://d3js.org/d3.v5.js"></script>
+    <script src="./src/Algorithms/vkbeautify.js"></script>
+
+    
+    <script src="./src/components/grid.js"></script>
+    <script  src="./src/components/polygon.js"></script>
+    <script src="./src/Algorithms/createKmlFiles.js"></script>
+    <script  src="./src/Algorithms/kmeans.js"></script>
+    <script  src="./src/Algorithms/TSP.js"></script>
+    <script type="module" src="./src/components/map.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="./public/css/components/map.css" />
+    <link rel="stylesheet" type="text/css" href="./public/css/components/buttons.css" />
+</head>
+
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <div id="map" class="rounded border shadow-lg"></div>
+    <div id="button-group" class="btn-group rounded border shadow-lg p-1 m-2">
+        <button class="btn btn-outline-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#droneMenu"
+            aria-controls="droneMenu">Menu de drones</button>
+        <button class="btn btn-outline-primary" id="newDrone" onclick="" data-bs-toggle="modal"
+            data-bs-target="#createDrone">Añadir dron</button>
+        <button class="btn btn-outline-info" id="drawPoints" onclick="drawPoints();">Dibujar puntos</button>
+        <button class="btn btn-outline-danger" id="createPath" onclick="calculatePath()">Calcular ruta</button>
+        <button class="btn btn-outline-danger" id="newMapRotation" onclick="" data-bs-toggle="modal"
+            data-bs-target="#mapRotation">Dirección Viento</button>
+        <button class="btn btn-outline-success" id="createFile", onclick="createFile()">Descargar ruta</button>
+    </div>
+
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="droneMenu" aria-labelledby="droneMenuLabel">
+        <div class="offcanvas-header">
+            <h3 class="offcanvas-title" id="droneMenuLabel">Drones</h3>
+        </div>
+        <div class="offcanvas-body" id="canvasBody">
+
+        </div>
+
+
+    </div>
+
+    <div class="modal" id="createDrone" aria-hidden="true" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Añadir nuevo dron</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <input id="name"> Nombre <br>
+                        <input id="velocidad"> Velocidad (m/s) <br>
+                        <input id="altura"> Altura de vuelo (m) <br>
+                        <input id="bateria"> Tiempo estimado de la batería (min) <br>
+                        <input id="fov"> FOV de la cámara <br>
+                        <br>
+                        <button class="btn btn-info" type="button" id="creteDronebutton" onclick="createDrone();"> Crear
+                            dron</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="mapRotation" aria-hidden="true" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Poner dirección del viento</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <input id="rotationValue"> Dirección del viento (º) <br>
+                        <br>
+                        <button class="btn btn-info" type="button" id="mapRotationButton" onclick="mapRotation();"> Cambiar dirección</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 
+     The `defer` attribute causes the callback to execute after the full HTML
+     document has been parsed. For non-blocking uses, avoiding race conditions,
+     and consistent behavior across browsers, consider loading using Promises
+     with https://www.npmjs.com/package/@googlemaps/js-api-loader.
+    -->
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCgL4rET99UOspD8e6VvNBTAX2vD-v_lpc&callback=initMap"
+        defer></script>
+</body>
