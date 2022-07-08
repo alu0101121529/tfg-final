@@ -137,12 +137,12 @@ function createDroneInTheMenu(drone) {
         div.appendChild(ulList);
         let checkbox = document.createElement("input");
         checkbox.type = "checkbox";
-        checkbox.name = "Actilet dron";
+        checkbox.name = "Activar dron";
         checkbox.id = drone.name + "_checkbox";
         checkbox.onchange = activateDrone;
         let checkboxLabel = document.createElement("label");
         checkboxLabel.htmlFor = checkbox.id;
-        checkboxLabel.appendChild(document.createTextNode("Actilet dron"));
+        checkboxLabel.appendChild(document.createTextNode("Activar dron"));
         ulList.appendChild(checkboxLabel);
         ulList.appendChild(checkbox);
         let droneMenu = document.getElementById("canvasBody");
@@ -292,7 +292,8 @@ function distanceBetweenEachGridPoints() {
 }
 
 function translatePolygonToJs() {
-    let paths = globalPolygon.getPath().Md;
+    console.log(globalPolygon.getPath())
+    let paths = globalPolygon.getPath().Ld;
     paths.pop();
     let jsPolygon = [];
     for (let i = 0; i < paths.length; i++) {
@@ -384,7 +385,7 @@ function createFile() {
 
 function calculateDroneMaximumDistance() {
     let maxDistance = dronActivated.velocity * dronActivated.batery * 0.7 * 60
-    return Math.sqrt(maxDistance) * 6
+    return Math.sqrt(maxDistance) * 6.6
 }
 
 function calculatePath() {
